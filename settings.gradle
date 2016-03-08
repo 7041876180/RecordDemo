@@ -1,1 +1,2 @@
-include ':app', ':greendaolibrary', ':decorate', ':observer', ':command', ':threadpoll', ':iterator', ':getinsidetext', ':rabbitdemo'
+include ':app'
+//include ':greendaolibrary', ':decorate', ':observer', ':command', ':threadpoll', ':iterator', ':getinsidetext', ':rabbitdemo'
