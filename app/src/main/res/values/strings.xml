@@ -5,6 +5,7 @@
     <string name="third_activity">TimeDescriptionAty</string>
     <string name="fouth_activity">TestActivity04</string>
     <string name="round_mvp_aty">RoundMVPActivity</string>
+    <string name="linkage_activity">LinkageActivity</string>
     <string name="title_activity_navigation_drawer_aty">NavigationDrawerAty</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
