@@ -1,0 +1,33 @@
+@startuml
+
+interface Command
+class Equip
+
+interface Command{
+void execute()
+}
+
+class Equip {
+void on()
+void off()
+}
+
+Command <|-- class EquipOnCommand
+Command <|-- class EquipOffCommand
+
+class EquipOnCommand{
+Equip equip;
+void execute(){ equip.on();}
+}
+
+class EquipOffCommand{
+Equip equip;
+void execute(){ equip.off();}
+}
+
+class CommandControl{
+Command command;
+
+}
+
+@enduml

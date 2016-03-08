@@ -1,0 +1,25 @@
+@startuml
+
+interface Observable
+interface Observer
+class Subject
+class ObserverImpl1
+class ObserverImpl2
+class ObserverImpl3
+
+Observable <|-- Subject
+Observer <|-- ObserverImpl1
+Observer <|-- ObserverImpl2
+Observer <|-- ObserverImpl3
+
+interface Observable {
+void addObserver(Observer o)
+void deleteObserver(Observer o)
+void notifyObservers()
+}
+
+interface Observer{
+void update(Object obj)
+}
+
+@enduml

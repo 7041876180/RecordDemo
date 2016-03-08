@@ -1,0 +1,30 @@
+@startuml
+
+abstract class Beverage
+abstract class CondimentDecorator
+
+Beverage <|-- Espresso
+Beverage <|-- HouseBlend
+Beverage <|-- CondimentDecorator
+
+CondimentDecorator <|-- Mocha
+CondimentDecorator <|-- Milk
+
+class Beverage {
+String description
+String getDescription()
+abstract double cost()
+}
+
+class CondimentDecorator{
+abstract String getDescription()
+}
+
+class Mocha{
+Beverage b
+public Mocha(Beverage b){this.b = b}
+public String getDescription(){return b.getDescription + ",摩卡";}
+public double cost(){return .20 + b.cost();}
+}
+
+@enduml

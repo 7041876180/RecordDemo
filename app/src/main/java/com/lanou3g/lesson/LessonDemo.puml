@@ -1,0 +1,42 @@
+@startuml
+
+interface ViewInterface<T>{
+    void showLoading();
+    void hideLoading();
+    void showRefreshData(T result);
+    void showLoadData(T result);
+    void dealError();
+}
+interface ModelInterface{
+    void startRefreshConnect(String refreshUrl, NetworkConnect refreshConnect);
+    void startLoadConnect(String loadUrl,NetworkConnect loadConnect);
+}
+interface PresenterInterface{
+    void startNetConnect(String url);
+    void refresh(String refreshUrl);
+    void load(String loadUrl);
+}
+
+interface NetworkConnect<T>{
+    void onRefreshCompleted(T result);
+    void onLoadCompleted(T result);
+    void onFailed();
+}
+
+ViewInterface <|-- Activity
+ModelInterface <|-- Model
+PresenterInterface <|-- Presenter
+NetworkConnect <|-- Presenter
+
+class Activity{
+    PresenterInterface presenterImpl;
+}
+class Model{
+
+}
+class Presenter{
+    ViewInterface viewImpl;
+    ModelInterface modelImpl;
+}
+
+@enduml

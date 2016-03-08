@@ -1,0 +1,1 @@
+include ':app', ':greendaolibrary', ':decorate', ':observer', ':command', ':threadpoll', ':iterator', ':getinsidetext', ':rabbitdemo'

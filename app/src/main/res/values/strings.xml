@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">DLA0806LessonDemo</string>
+    <string name="first_activity">RoundPagerActivity</string>
+    <string name="second_activity">TestActivity02</string>
+    <string name="third_activity">TimeDescriptionAty</string>
+    <string name="fouth_activity">TestActivity04</string>
+    <string name="round_mvp_aty">RoundMVPActivity</string>
+    <string name="title_activity_navigation_drawer_aty">NavigationDrawerAty</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="calculate">Calculate</string>
+</resources>
