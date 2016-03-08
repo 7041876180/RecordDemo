@@ -58,6 +58,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.activity.LinkageActivity"
+            android:label="@string/linkage_activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="com.lanou3g.lesson.DEMO_CODE"/>
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ui.activity.TestActivity04"
             android:label="@string/fouth_activity">
             <intent-filter>

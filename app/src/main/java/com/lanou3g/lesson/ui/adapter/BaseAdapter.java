@@ -21,9 +21,16 @@ public abstract class BaseAdapter<T> extends android.widget.BaseAdapter {
     public BaseAdapter(List<T> dataList , Context context) {
         this.dataList = dataList;
         this.mContext = context;
+        if (dataList == null) {
+            this.dataList = new ArrayList<>();
+        }
         if (inflater == null) {
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
+    }
+
+    public BaseAdapter(Context context) {
+        this(null,context);
     }
 
     private void addData(List<T> dataList, boolean isRefresh) {

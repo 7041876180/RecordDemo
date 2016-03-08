@@ -26,6 +26,10 @@ public class HeaderGridViewAdapter extends BaseAdapter<RecommendEntity> {
         this.imageLoader = VolleySingleton.getInstance().getImageLoader();
     }
 
+    public HeaderGridViewAdapter(Context context) {
+        this(null,context);
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
