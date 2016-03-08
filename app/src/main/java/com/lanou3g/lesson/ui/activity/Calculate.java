@@ -147,7 +147,10 @@ public class Calculate extends Activity {
 
     private int getViewColor(TextView tv) {
         ColorDrawable drawable = (ColorDrawable) tv.getBackground();
-        int color = drawable.getColor();
+        int color = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
+            color = drawable.getColor();
+        }
         return color;
     }
 }
