@@ -95,6 +95,15 @@
                 <category android:name="com.lanou3g.lesson.DEMO_CODE"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activity.ScanActivity"
+            android:label="ScanActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="com.lanou3g.lesson.DEMO_CODE"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
