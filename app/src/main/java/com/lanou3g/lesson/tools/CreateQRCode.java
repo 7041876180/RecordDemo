@@ -13,6 +13,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -36,14 +37,20 @@ public class CreateQRCode {
      * @param filePath 生成图片文件的路径
      * @param listener 回调监听
      */
-    public static void createQRImage(final String content, final String bmpName, final int widthPix, final int heightPix, final Bitmap logoBm, final String filePath, final OnCreateQRListener listener) {
+    public static void createQRImage(final String content, final String bmpName, final int widthPix, final int heightPix, final Bitmap logoBm, final OnCreateQRListener listener) {
         if (content == null || "".equals(content)) {
             return;
         }
+        File file = new File(cacheDir);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+
+        final String filePath = cacheDir + bmpName + ".jpg";
         final Handler handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
-                Bitmap bmp = BitmapFactory.decodeFile(cacheDir+"/"+bmpName);
+                Bitmap bmp = BitmapFactory.decodeFile(filePath);
                 listener.onSuccess(bmp);
                 return false;
             }
@@ -93,8 +100,9 @@ public class CreateQRCode {
                 bitmap = addLogo(bitmap, logoBm);
             }
 
+
             //必须使用compress方法将bitmap保存到文件中再进行读取。直接返回的bitmap是没有任何压缩的，内存消耗巨大！
-            boolean isSuccess = bitmap != null && bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(filePath+"/"+bmpName+".jpg"));
+            boolean isSuccess = bitmap != null && bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(filePath));
             if (isSuccess) {
                 handler.sendEmptyMessage(0);
             }
@@ -104,7 +112,7 @@ public class CreateQRCode {
     }
 
     public static boolean createQRImage(String content, String bmpName,OnCreateQRListener listener) {
-        createQRImage(content, bmpName,800, 800, null, cacheDir, listener);
+        createQRImage(content, bmpName,800, 800, null, listener);
         return false;
     }
 
