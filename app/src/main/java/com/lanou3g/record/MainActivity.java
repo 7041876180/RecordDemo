@@ -32,7 +32,8 @@ import java.util.Map;
 
 public class MainActivity extends ListActivity {
     private static final String TAG = "MainActivity";
-    private static final String CATEGORY_LANOU3G = "com.lanou3g.lesson.DEMO_CODE";
+    private static final String CATEGORY_LANOU3G = "com.lanou3g.record.DEMO_CODE";
+    private static final String ARGS_KEY = "com.lanou3g.lesson.Path";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class MainActivity extends ListActivity {
         register();
 
         Intent intent = getIntent();
-        String path = intent.getStringExtra("com.lanou3g.lesson.Path");
+        String path = intent.getStringExtra(ARGS_KEY);
         if (path == null) {
             path = "";
         }
@@ -129,7 +130,7 @@ public class MainActivity extends ListActivity {
     protected Intent browseIntent(String path) {
         Intent result = new Intent();
         result.setClass(this, MainActivity.class);
-        result.putExtra("com.lanou3g.lesson.Path", path);
+        result.putExtra(ARGS_KEY, path);
         return result;
     }
 

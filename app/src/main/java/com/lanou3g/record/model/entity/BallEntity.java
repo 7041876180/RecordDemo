@@ -1,5 +1,6 @@
 package com.lanou3g.record.model.entity;
 
+import com.google.gson.annotations.SerializedName;
 import com.lanou3g.record.model.entity.greendao.RecommendEntity;
 
 import java.util.List;

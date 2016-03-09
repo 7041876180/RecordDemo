@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -12,10 +13,12 @@ import com.lanou3g.record.model.entity.BallEntity;
 import com.lanou3g.record.model.entity.greendao.RecommendEntity;
 import com.lanou3g.record.network.GoNet;
 import com.lanou3g.record.network.NetInterface;
+import com.lanou3g.record.okhttp.OkHttpClientManager;
 import com.lanou3g.record.ui.adapter.HeaderGridViewAdapter;
 import com.lanou3g.record.ui.adapter.HeaderViewPagerAdapter;
 import com.lanou3g.record.view.HeaderGridView;
 import com.lanou3g.record.volley.VolleySingleton;
+import com.squareup.okhttp.Request;
 
 import java.util.List;
 
@@ -58,7 +61,7 @@ public class RoundPagerActivity extends AbsBaseActivity implements AdapterView.O
     @Override
     protected void initData() {
         initNetwork();
-//        initThread();
+        initThread();
     }
 
     private void initThread() {
@@ -105,20 +108,21 @@ public class RoundPagerActivity extends AbsBaseActivity implements AdapterView.O
                 toastError();
             }
         });
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         controlThread = true;
-//        mHandler.sendEmptyMessage(ARGS_WHAT);
+        mHandler.sendEmptyMessage(ARGS_WHAT);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         controlThread = false;
-//        mHandler.removeMessages(ARGS_WHAT);
+        mHandler.removeMessages(ARGS_WHAT);
     }
 
     @Override

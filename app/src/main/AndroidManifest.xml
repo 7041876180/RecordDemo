@@ -36,7 +36,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="com.lanou3g.lesson.DEMO_CODE"/>
+                <category android:name="com.lanou3g.record.DEMO_CODE"/>
             </intent-filter>
         </activity>
         <activity
@@ -45,7 +45,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="com.lanou3g.lesson.DEMO_CODE"/>
+                <category android:name="com.lanou3g.record.DEMO_CODE"/>
             </intent-filter>
         </activity>
         <activity
@@ -54,7 +54,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="com.lanou3g.lesson.DEMO_CODE"/>
+                <category android:name="com.lanou3g.record.DEMO_CODE"/>
             </intent-filter>
         </activity>
         <activity
@@ -63,7 +63,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="com.lanou3g.lesson.DEMO_CODE"/>
+                <category android:name="com.lanou3g.record.DEMO_CODE"/>
             </intent-filter>
         </activity>
         <activity
@@ -71,7 +71,7 @@
             android:label="@string/linkage_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-                <category android:name="com.lanou3g.lesson.DEMO_CODE"/>
+                <category android:name="com.lanou3g.record.DEMO_CODE"/>
             </intent-filter>
         </activity>
         <activity
@@ -79,7 +79,7 @@
             android:label="@string/fouth_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-                <category android:name="com.lanou3g.lesson.DEMO_CODE"/>
+                <category android:name="com.lanou3g.record.DEMO_CODE"/>
             </intent-filter>
         </activity>
         <activity
@@ -88,7 +88,7 @@
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-                <category android:name="com.lanou3g.lesson.DEMO_CODE"/>
+                <category android:name="com.lanou3g.record.DEMO_CODE"/>
             </intent-filter>
         </activity>
         <activity
@@ -97,7 +97,7 @@
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-                <category android:name="com.lanou3g.lesson.DEMO_CODE"/>
+                <category android:name="com.lanou3g.record.DEMO_CODE"/>
             </intent-filter>
         </activity>
         <activity
@@ -105,7 +105,7 @@
             android:label="二维码/ScanActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-                <category android:name="com.lanou3g.lesson.DEMO_CODE"/>
+                <category android:name="com.lanou3g.record.DEMO_CODE"/>
             </intent-filter>
         </activity>
         <activity
@@ -113,7 +113,7 @@
             android:label="二维码/CreateQRCodeAty">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-                <category android:name="com.lanou3g.lesson.DEMO_CODE"/>
+                <category android:name="com.lanou3g.record.DEMO_CODE"/>
             </intent-filter>
         </activity>
 

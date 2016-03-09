@@ -24,7 +24,7 @@ public class GoNet {
 
     public NetModeInterface getNetMode() {
         if (netMode == null) {
-            netMode = new VolleyImpl(sContext);
+            netMode = new OkHttpImpl();
         }
         return netMode;
     }
