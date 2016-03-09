@@ -23,7 +23,7 @@ import java.util.Map;
  */
 public class CreateQRCode {
 
-    private static final String cacheDir = SDCardHelper.getSdCardPath();
+    private static final String cacheDir = "/sdcard/Download/";
 
 
     /**
