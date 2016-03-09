@@ -1,14 +1,27 @@
 package com.lanou3g.record;
 
 import android.app.ListActivity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
+import com.tencent.android.tpush.XGIOperateCallback;
+import com.tencent.android.tpush.XGPushConfig;
+import com.tencent.android.tpush.XGPushManager;
+import com.tencent.android.tpush.common.Constants;
+
+import java.lang.ref.WeakReference;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,18 +38,7 @@ public class MainActivity extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-//                != PackageManager.PERMISSION_GRANTED) {
-////            mClss = clss;
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{Manifest.permission.CAMERA}, 1);
-//        }
-//        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CONTACTS)
-//                != PackageManager.PERMISSION_GRANTED) &&(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
-//                != PackageManager.PERMISSION_GRANTED)){
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{Manifest.permission.WRITE_CONTACTS,Manifest.permission.READ_CONTACTS}, 1);
-//        }
+        register();
 
         Intent intent = getIntent();
         String path = intent.getStringExtra("com.lanou3g.lesson.Path");
@@ -45,8 +47,8 @@ public class MainActivity extends ListActivity {
         }
 
         setListAdapter(new SimpleAdapter(this, getData(path),
-                android.R.layout.simple_list_item_1, new String[] { "title" },
-                new int[] { android.R.id.text1 }));
+                android.R.layout.simple_list_item_1, new String[]{"title"},
+                new int[]{android.R.id.text1}));
         getListView().setTextFilterEnabled(true);
     }
 
@@ -141,9 +143,31 @@ public class MainActivity extends ListActivity {
     @Override
     @SuppressWarnings("unchecked")
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        Map<String, Object> map = (Map<String, Object>)l.getItemAtPosition(position);
+        Map<String, Object> map = (Map<String, Object>) l.getItemAtPosition(position);
 
         Intent intent = (Intent) map.get("intent");
         startActivity(intent);
     }
+
+    private void register() {
+        XGPushConfig.enableDebug(this, true);
+        XGPushManager.registerPush(getApplicationContext(),
+                new XGIOperateCallback() {
+                    @Override
+                    public void onSuccess(Object data, int flag) {
+                        Log.w(TAG,
+                                "+++ register push sucess. token:" + data);
+                    }
+
+                    @Override
+                    public void onFail(Object data, int errCode, String msg) {
+                        Log.w(TAG,
+                                "+++ register push fail. token:" + data
+                                        + ", errCode:" + errCode + ",msg:"
+                                        + msg);
+                    }
+                });
+    }
+
+
 }

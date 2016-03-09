@@ -3,7 +3,7 @@ package com.lanou3g.record.dao;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.lanou3g.record.application.LessonApplication;
+import com.lanou3g.record.application.RecordApp;
 import com.lanou3g.record.model.entity.greendao.DaoMaster;
 import com.lanou3g.record.model.entity.greendao.DaoSession;
 import com.lanou3g.record.model.entity.greendao.RecommendEntityDao;
@@ -22,7 +22,7 @@ public class DaoSingleton {
     private RecommendEntityDao recommendDao;
 
     private DaoSingleton() {
-        context = LessonApplication.getContext();
+        context = RecordApp.getContext();
     }
 
     public static DaoSingleton getInstance() {
