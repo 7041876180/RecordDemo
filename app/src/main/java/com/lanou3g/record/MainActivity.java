@@ -1,14 +1,27 @@
 package com.lanou3g.record;
 
 import android.app.ListActivity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
+import com.tencent.android.tpush.XGIOperateCallback;
+import com.tencent.android.tpush.XGPushConfig;
+import com.tencent.android.tpush.XGPushManager;
+import com.tencent.android.tpush.common.Constants;
+
+import java.lang.ref.WeakReference;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,6 +37,8 @@ public class MainActivity extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        register();
 
 //        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
 //                != PackageManager.PERMISSION_GRANTED) {
@@ -45,8 +60,8 @@ public class MainActivity extends ListActivity {
         }
 
         setListAdapter(new SimpleAdapter(this, getData(path),
-                android.R.layout.simple_list_item_1, new String[] { "title" },
-                new int[] { android.R.id.text1 }));
+                android.R.layout.simple_list_item_1, new String[]{"title"},
+                new int[]{android.R.id.text1}));
         getListView().setTextFilterEnabled(true);
     }
 
@@ -141,9 +156,84 @@ public class MainActivity extends ListActivity {
     @Override
     @SuppressWarnings("unchecked")
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        Map<String, Object> map = (Map<String, Object>)l.getItemAtPosition(position);
+        Map<String, Object> map = (Map<String, Object>) l.getItemAtPosition(position);
 
         Intent intent = (Intent) map.get("intent");
         startActivity(intent);
+    }
+
+    private MsgReceiver updateListViewReceiver;
+    Message m = null;
+
+    private void register() {
+        XGPushConfig.enableDebug(this, true);
+        // 0.注册数据更新监听器
+        updateListViewReceiver = new MsgReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.qq.xgdemo.activity.UPDATE_LISTVIEW");
+        registerReceiver(updateListViewReceiver, intentFilter);
+        // 1.获取设备Token
+        Handler handler = new HandlerExtension(MainActivity.this);
+        m = handler.obtainMessage();
+        // 注册接口
+        XGPushManager.registerPush(getApplicationContext(),
+                new XGIOperateCallback() {
+                    @Override
+                    public void onSuccess(Object data, int flag) {
+                        Log.w(Constants.LogTag,
+                                "+++ register push sucess. token:" + data);
+                        m.obj = "+++ register push sucess. token:" + data;
+                        m.sendToTarget();
+                    }
+
+                    @Override
+                    public void onFail(Object data, int errCode, String msg) {
+                        Log.w(Constants.LogTag,
+                                "+++ register push fail. token:" + data
+                                        + ", errCode:" + errCode + ",msg:"
+                                        + msg);
+
+                        m.obj = "+++ register push fail. token:" + data
+                                + ", errCode:" + errCode + ",msg:" + msg;
+                        m.sendToTarget();
+                    }
+                });
+    }
+
+    private static class HandlerExtension extends Handler {
+        WeakReference<MainActivity> mActivity;
+
+        HandlerExtension(MainActivity activity) {
+            mActivity = new WeakReference<MainActivity>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            MainActivity theActivity = mActivity.get();
+            if (theActivity == null) {
+                theActivity = new MainActivity();
+            }
+            if (msg != null) {
+//                Log.w(Constants.LogTag, msg.obj.toString());
+//                TextView textView = (TextView) theActivity
+//                        .findViewById(R.id.deviceToken);
+//                textView.setText(XGPushConfig.getToken(theActivity));
+                Log.d(TAG, "handleMessage: " + msg.obj.toString() + XGPushConfig.getToken(theActivity));
+            }
+            // XGPushManager.registerCustomNotification(theActivity,
+            // "BACKSTREET", "BOYS", System.currentTimeMillis() + 5000, 0);
+        }
+    }
+
+    public class MsgReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+//             TODO Auto-generated method stub
+//            allRecorders = notificationService.getCount();
+//            getNotificationswithouthint(id);
+            Log.d(TAG, "onReceive() called with: " + "context = [" + context + "], intent = [" + intent + "]");
+        }
     }
 }
