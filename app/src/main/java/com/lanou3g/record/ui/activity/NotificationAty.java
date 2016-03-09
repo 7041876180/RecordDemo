@@ -23,7 +23,7 @@ import com.lanou3g.record.R;
  */
 public class NotificationAty extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "NotificationAty";
     private static final String ACTION_PRE = "com.lanou3g.record.PRE_ACTION";
     private static final String ACTION_NEXT = "com.lanou3g.record.NEXT_ACTION";
 
