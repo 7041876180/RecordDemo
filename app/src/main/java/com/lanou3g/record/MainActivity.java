@@ -40,19 +40,6 @@ public class MainActivity extends ListActivity {
 
         register();
 
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-//                != PackageManager.PERMISSION_GRANTED) {
-////            mClss = clss;
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{Manifest.permission.CAMERA}, 1);
-//        }
-//        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CONTACTS)
-//                != PackageManager.PERMISSION_GRANTED) &&(ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
-//                != PackageManager.PERMISSION_GRANTED)){
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{Manifest.permission.WRITE_CONTACTS,Manifest.permission.READ_CONTACTS}, 1);
-//        }
-
         Intent intent = getIntent();
         String path = intent.getStringExtra("com.lanou3g.lesson.Path");
         if (path == null) {
@@ -162,78 +149,25 @@ public class MainActivity extends ListActivity {
         startActivity(intent);
     }
 
-    private MsgReceiver updateListViewReceiver;
-    Message m = null;
-
     private void register() {
         XGPushConfig.enableDebug(this, true);
-        // 0.注册数据更新监听器
-        updateListViewReceiver = new MsgReceiver();
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("com.qq.xgdemo.activity.UPDATE_LISTVIEW");
-        registerReceiver(updateListViewReceiver, intentFilter);
-        // 1.获取设备Token
-        Handler handler = new HandlerExtension(MainActivity.this);
-        m = handler.obtainMessage();
-        // 注册接口
         XGPushManager.registerPush(getApplicationContext(),
                 new XGIOperateCallback() {
                     @Override
                     public void onSuccess(Object data, int flag) {
-                        Log.w(Constants.LogTag,
+                        Log.w(TAG,
                                 "+++ register push sucess. token:" + data);
-                        m.obj = "+++ register push sucess. token:" + data;
-                        m.sendToTarget();
                     }
 
                     @Override
                     public void onFail(Object data, int errCode, String msg) {
-                        Log.w(Constants.LogTag,
+                        Log.w(TAG,
                                 "+++ register push fail. token:" + data
                                         + ", errCode:" + errCode + ",msg:"
                                         + msg);
-
-                        m.obj = "+++ register push fail. token:" + data
-                                + ", errCode:" + errCode + ",msg:" + msg;
-                        m.sendToTarget();
                     }
                 });
     }
 
-    private static class HandlerExtension extends Handler {
-        WeakReference<MainActivity> mActivity;
 
-        HandlerExtension(MainActivity activity) {
-            mActivity = new WeakReference<MainActivity>(activity);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            MainActivity theActivity = mActivity.get();
-            if (theActivity == null) {
-                theActivity = new MainActivity();
-            }
-            if (msg != null) {
-//                Log.w(Constants.LogTag, msg.obj.toString());
-//                TextView textView = (TextView) theActivity
-//                        .findViewById(R.id.deviceToken);
-//                textView.setText(XGPushConfig.getToken(theActivity));
-                Log.d(TAG, "handleMessage: " + msg.obj.toString() + XGPushConfig.getToken(theActivity));
-            }
-            // XGPushManager.registerCustomNotification(theActivity,
-            // "BACKSTREET", "BOYS", System.currentTimeMillis() + 5000, 0);
-        }
-    }
-
-    public class MsgReceiver extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-//             TODO Auto-generated method stub
-//            allRecorders = notificationService.getCount();
-//            getNotificationswithouthint(id);
-            Log.d(TAG, "onReceive() called with: " + "context = [" + context + "], intent = [" + intent + "]");
-        }
-    }
 }

@@ -6,7 +6,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.lanou3g.record.application.LessonApplication;
+import com.lanou3g.record.application.RecordApp;
 
 /**
  * Created by Risky on 15/10/21.
@@ -31,7 +31,7 @@ public class VolleySingleton {
 
     private RequestQueue getQueue() {
         if (queue == null) {
-            queue = Volley.newRequestQueue(LessonApplication.getContext());
+            queue = Volley.newRequestQueue(RecordApp.getContext());
         }
         return queue;
     }
