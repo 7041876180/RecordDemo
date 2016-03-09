@@ -3,7 +3,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <com.lanou3g.lesson.view.LinkageListView
+    <com.lanou3g.record.view.LinkageListView
         android:id="@+id/linkage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

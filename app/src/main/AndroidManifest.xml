@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.lanou3g.lesson"
+<manifest package="com.lanou3g.record"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -9,13 +9,13 @@
     <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
-        android:name=".application.LessonApplication"
+        android:name="com.lanou3g.record.application.LessonApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.lanou3g.record.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.RoundPagerActivity"
+            android:name="com.lanou3g.record.ui.activity.RoundPagerActivity"
             android:label="@string/first_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.RoundMVPActivity"
+            android:name="com.lanou3g.record.ui.activity.RoundMVPActivity"
             android:label="@string/round_mvp_aty">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -41,7 +41,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.TestActivity02"
+            android:name="com.lanou3g.record.ui.activity.TestActivity02"
             android:label="@string/second_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -50,7 +50,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.TimeDescriptionAty"
+            android:name="com.lanou3g.record.ui.activity.TimeDescriptionAty"
             android:label="@string/third_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -59,7 +59,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.LinkageActivity"
+            android:name="com.lanou3g.record.ui.activity.LinkageActivity"
             android:label="@string/linkage_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -67,7 +67,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.TestActivity04"
+            android:name="com.lanou3g.record.ui.activity.TestActivity04"
             android:label="@string/fouth_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -75,7 +75,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.NavigationDrawerAty"
+            android:name="com.lanou3g.record.ui.activity.NavigationDrawerAty"
             android:label="@string/title_activity_navigation_drawer_aty"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -84,7 +84,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.Calculate"
+            android:name="com.lanou3g.record.ui.activity.Calculate"
             android:label="@string/calculate"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -93,7 +93,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.ScanActivity"
+            android:name="com.lanou3g.record.ui.activity.ScanActivity"
             android:label="二维码/ScanActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -101,7 +101,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.CreateQRCodeAty"
+            android:name="com.lanou3g.record.ui.activity.CreateQRCodeAty"
             android:label="二维码/CreateQRCodeAty">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
