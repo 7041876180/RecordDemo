@@ -43,7 +43,7 @@ public class CreateQRCode {
         final Handler handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
-                Bitmap bmp = BitmapFactory.decodeFile(cacheDir);
+                Bitmap bmp = BitmapFactory.decodeFile(cacheDir+"/"+bmpName);
                 listener.onSuccess(bmp);
                 return false;
             }
@@ -94,7 +94,7 @@ public class CreateQRCode {
             }
 
             //必须使用compress方法将bitmap保存到文件中再进行读取。直接返回的bitmap是没有任何压缩的，内存消耗巨大！
-            boolean isSuccess = bitmap != null && bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(filePath+bmpName+".jpg"));
+            boolean isSuccess = bitmap != null && bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(filePath+"/"+bmpName+".jpg"));
             if (isSuccess) {
                 handler.sendEmptyMessage(0);
             }
