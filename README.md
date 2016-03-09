@@ -11,3 +11,7 @@
         </intent-filter>
     </activity>
 ```
+
+为了编译,只是把app设置为了module.其他的都是一些小java程序(设计模式啥的).
+想看的话就把目录最外层的settings.gradle文件里面的注释打开
+app下面的java目录里面有一些.puml文件,是画UML类图的,需要插件支持.
