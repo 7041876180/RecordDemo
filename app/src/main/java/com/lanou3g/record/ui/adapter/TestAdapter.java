@@ -25,7 +25,7 @@ public class TestAdapter extends BaseAdapter<AdapterActivity.Entity,TestAdapter.
     }
 
     @Override
-    protected void onBindData(AdapterActivity.Entity data, ViewHolder holder) {
+    protected void onBindData(ViewHolder holder,AdapterActivity.Entity data) {
         holder.tvName.setText(data.getName());
         holder.tvPos.setText(data.getPosition()+"");
     }
