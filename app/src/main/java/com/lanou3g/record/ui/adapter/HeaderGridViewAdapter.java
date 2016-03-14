@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Risky on 15/10/28.
  */
-public class HeaderGridViewAdapter extends BaseAdapter<RecommendEntity> {
+public class HeaderGridViewAdapter extends AbsAdapter<RecommendEntity> {
     private ImageLoader imageLoader;
 
     public HeaderGridViewAdapter(List<RecommendEntity> dataList, Context context) {
