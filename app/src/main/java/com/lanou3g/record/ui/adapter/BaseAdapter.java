@@ -22,23 +22,24 @@ public abstract class BaseAdapter<T,VH extends BaseAdapter.ViewHolder> extends A
     public View getView(int position, View convertView, ViewGroup parent) {
         VH holder = null;
         if (convertView == null) {
-            convertView = inflater.inflate(getItemLayout(),parent,false);
-            holder = createHolder(convertView);
+            convertView = inflater.inflate(onItemCreate(),parent,false);
+            holder = onCreateHolder(convertView);
             convertView.setTag(holder);
         }else {
             holder = (VH) convertView.getTag();
         }
         T t = getItem(position);
-        bindData(t,holder);
+        onBindData(holder,t);
 
         return convertView;
     }
 
-    protected abstract void bindData(T data, VH holder);
 
-    public abstract VH createHolder(View view);
+    protected abstract void onBindData(VH holder,T data);
 
-    public abstract int getItemLayout();
+    protected abstract VH onCreateHolder(View view);
+
+    protected abstract int onItemCreate();
 
     public static class ViewHolder{
         private View view;
