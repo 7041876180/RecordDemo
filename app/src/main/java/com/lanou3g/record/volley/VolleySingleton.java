@@ -3,20 +3,28 @@ package com.lanou3g.record.volley;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.lanou3g.record.application.RecordApp;
 
+import java.io.File;
+
 /**
  * Created by Risky on 15/10/21.
  */
 public class VolleySingleton {
+    private static final String cacheDir = DiskCache.cacheDir;
 
     private RequestQueue queue;
     private ImageLoader imageLoader;
 
     private VolleySingleton() {
+        File file = new File(cacheDir);
+        if (!file.exists()) {
+            file.mkdir();
+        }
         queue = getQueue();
         imageLoader = new ImageLoader(queue, new DoubleCache());
     }

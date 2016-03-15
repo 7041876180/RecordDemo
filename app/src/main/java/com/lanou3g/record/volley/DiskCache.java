@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class DiskCache implements ImageLoader.ImageCache {
 
-    private static final String cacheDir = "/sdcard/Download/";
+    static final String cacheDir = "/sdcard/Download/";
 //    static String cacheDir = SDCardHelper.getSdCardPath();
 
     @Override
@@ -27,10 +27,6 @@ public class DiskCache implements ImageLoader.ImageCache {
 
     @Override
     public void putBitmap(String url, Bitmap bitmap) {
-        File file = new File(cacheDir);
-        if (!file.exists()) {
-            file.mkdir();
-        }
         url = MD5Util.getMD5Str(url);
         File imageFile = new File(cacheDir, url+".jpg");
         if (!imageFile.exists()) {
