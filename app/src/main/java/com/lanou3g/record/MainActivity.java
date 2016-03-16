@@ -157,13 +157,13 @@ public class MainActivity extends ListActivity {
                     @Override
                     public void onSuccess(Object data, int flag) {
                         Log.w(TAG,
-                                "+++ register push sucess. token:" + data);
+                                "+++ _register push sucess. token:" + data);
                     }
 
                     @Override
                     public void onFail(Object data, int errCode, String msg) {
                         Log.w(TAG,
-                                "+++ register push fail. token:" + data
+                                "+++ _register push fail. token:" + data
                                         + ", errCode:" + errCode + ",msg:"
                                         + msg);
                     }

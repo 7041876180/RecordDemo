@@ -133,6 +133,14 @@
                 <category android:name="com.lanou3g.record.DEMO_CODE"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activity.ObserverAty"
+            android:label="ObserverAty">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="com.lanou3g.record.DEMO_CODE"/>
+            </intent-filter>
+        </activity>
 
         <!--信鸽推送-->
         <!-- 【必须】 (2.30及以上版新增)展示通知的activity -->
