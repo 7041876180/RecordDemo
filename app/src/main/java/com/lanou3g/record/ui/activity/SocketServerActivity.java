@@ -13,7 +13,9 @@ import android.widget.ListView;
 
 import com.lanou3g.record.R;
 import com.lanou3g.record.model.entity.ChatMessage;
+import com.lanou3g.record.tools.CloseHelper;
 import com.lanou3g.record.ui.adapter.SocketAdapter;
+import com.lanou3g.record.utils.StreamUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -71,30 +73,12 @@ public class SocketServerActivity extends AppCompatActivity implements View.OnCl
         ServerSocket server = null;
         int i = 1;
         while (true) {
+            InputStream is = null;
             try {
                 server = new ServerSocket(1958);
                 Socket socket = server.accept();
-                InputStream is = socket.getInputStream();
-
-                InputStreamReader reader = new InputStreamReader(is);
-                try {
-                    if (null != server) server.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                char[] buffer = new char[2];
-                int temp = 1;
-                Log.d(TAG, "initSocketServer: 准备读取数据流");
-                StringBuilder sb = new StringBuilder();
-                Log.d(TAG, "initSocketServer: new Builder");
-                while ((temp = reader.read(buffer)) != -1) {
-                    sb.append(String.valueOf(buffer, 0, temp));
-                    Log.d(TAG, "initSocketServer: 读取数据流"+sb.toString());
-                }
-                Log.d(TAG, "initSocketServer: 读取数据流完毕");
-                String content = sb.toString();
-                is.close();
-                reader.close();
+                is = socket.getInputStream();
+                String content = StreamUtil.inputToString(is);
                 Message msg = handler.obtainMessage();
                 msg.obj = content;
                 handler.sendMessage(msg);
@@ -102,7 +86,11 @@ public class SocketServerActivity extends AppCompatActivity implements View.OnCl
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
-
+                try {
+                    if (null != server) server.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

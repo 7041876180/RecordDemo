@@ -12,12 +12,15 @@ import android.widget.ListView;
 import com.lanou3g.record.R;
 import com.lanou3g.record.model.entity.ChatMessage;
 import com.lanou3g.record.ui.adapter.SocketAdapter;
+import com.lanou3g.record.utils.StreamUtil;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 /**
@@ -46,30 +49,16 @@ public class SocketClientActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void sendSocket(String content) {
-
-
-        // 10.0.3.15:1958
+        Log.d("SocketClientActivity", content);
         Socket socket = null;
         try {
             socket = new Socket("192.168.0.103", 1958);
-            byte[] data = content.getBytes();
-            InputStream is = new ByteArrayInputStream(data);
             OutputStream os = socket.getOutputStream();
-            byte[] buffer = new byte[16];
-            int temp = 0;
-            while ((temp = is.read(buffer)) != -1) {
-                os.write(buffer, 0, temp);
-            }
-            os.flush();
+            StreamUtil.stringToStream(content,os);
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            try {
-                socket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
+
 
     }
 
