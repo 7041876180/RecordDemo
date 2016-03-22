@@ -15,7 +15,7 @@ import com.lanou3g.record.ui.adapter.SocketAdapter;
 /**
  * 本类由: Risky57 创建于: 16/3/22.
  */
-public class SocketActivity extends AppCompatActivity implements View.OnClickListener{
+public class SocketClientActivity extends AppCompatActivity implements View.OnClickListener{
     private ListView lvChat;
     private Button btnSend,btnReceive;
     private EditText editText;
@@ -30,10 +30,10 @@ public class SocketActivity extends AppCompatActivity implements View.OnClickLis
         btnReceive = (Button) findViewById(R.id.btn_receive);
         editText = (EditText) findViewById(R.id.et_edit);
 
+        btnSend.setOnClickListener(this);
+        btnReceive.setOnClickListener(this);
         adapter = new SocketAdapter(this);
         lvChat.setAdapter(adapter);
-
-
     }
 
     @Override
@@ -50,6 +50,6 @@ public class SocketActivity extends AppCompatActivity implements View.OnClickLis
                 break;
         }
         adapter.append(msg);
-
+        lvChat.smoothScrollToPosition(adapter.getCount()-1);
     }
 }
