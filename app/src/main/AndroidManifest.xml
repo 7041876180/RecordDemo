@@ -140,6 +140,13 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="com.lanou3g.record.DEMO_CODE"/>
             </intent-filter>
+        </activity><activity
+            android:name=".ui.activity.SocketActivity"
+            android:label="SocketActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="com.lanou3g.record.DEMO_CODE"/>
+            </intent-filter>
         </activity>
 
         <!--信鸽推送-->
