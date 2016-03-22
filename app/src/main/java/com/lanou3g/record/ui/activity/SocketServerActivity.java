@@ -1,5 +1,6 @@
 package com.lanou3g.record.ui.activity;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.lanou3g.record.R;
@@ -30,19 +32,23 @@ import java.net.Socket;
 public class SocketServerActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "SocketServerActivity";
     private ListView lvChat;
-    private Button btnSend, btnReceive;
+    private Button btnSend;
+    private ImageView imgReceive;
     private EditText editText;
     private SocketAdapter adapter;
 
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            String content = (String) msg.obj;
-            ChatMessage chat = new ChatMessage();
-            chat.setContent(content);
-            chat.setMsgMode(ChatMessage.MODE_RECEIVE);
-            adapter.append(chat);
-            lvChat.smoothScrollToPosition(adapter.getCount() - 1);
+//            String content = (String) msg.obj;
+//            ChatMessage chat = new ChatMessage();
+//            chat.setContent(content);
+//            chat.setMsgMode(ChatMessage.MODE_RECEIVE);
+//            adapter.append(chat);
+//            lvChat.smoothScrollToPosition(adapter.getCount() - 1);
+            Bitmap bmp = (Bitmap) msg.obj;
+            Log.d(TAG, "handleMessage: " + bmp.getWidth() + "-->" +bmp);
+            imgReceive.setImageBitmap(bmp);
             return false;
         }
     });
@@ -50,14 +56,14 @@ public class SocketServerActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_socket);
+        setContentView(R.layout.activity_receive);
         lvChat = (ListView) findViewById(R.id.lv_chat);
         btnSend = (Button) findViewById(R.id.btn_send);
-        btnReceive = (Button) findViewById(R.id.btn_receive);
+        imgReceive = (ImageView) findViewById(R.id.img_receive);
         editText = (EditText) findViewById(R.id.et_edit);
 
         btnSend.setOnClickListener(this);
-        btnReceive.setOnClickListener(this);
+        imgReceive.setOnClickListener(this);
         adapter = new SocketAdapter(this);
         lvChat.setAdapter(adapter);
 
@@ -73,14 +79,17 @@ public class SocketServerActivity extends AppCompatActivity implements View.OnCl
         ServerSocket server = null;
         int i = 1;
         while (true) {
-            InputStream is = null;
             try {
                 server = new ServerSocket(1958);
+                Log.d(TAG, "initSocketServer: 准备接收");
                 Socket socket = server.accept();
-                is = socket.getInputStream();
-                String content = StreamUtil.inputToString(is);
+                InputStream is = socket.getInputStream();
+//                String content = StreamUtil.inputToString(is);
+                Log.d(TAG, "initSocketServer: "+is);
+                Bitmap bmp = StreamUtil.inputToBitmap(is);
                 Message msg = handler.obtainMessage();
-                msg.obj = content;
+//                msg.obj = content;
+                msg.obj = bmp;
                 handler.sendMessage(msg);
 
             } catch (IOException e) {

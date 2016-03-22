@@ -1,5 +1,7 @@
 package com.lanou3g.record.utils;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 
 import java.io.BufferedReader;
@@ -28,6 +30,14 @@ public class StreamUtil {
             if (reader != null) reader.close();
             return buffer.toString();
         }else return null;
+    }
+    public static Bitmap inputToBitmap(InputStream is){
+        Bitmap bmp = BitmapFactory.decodeStream(is);
+        return bmp;
+    }
+
+    public static void bmpToStream(Bitmap bmp ,OutputStream os){
+        bmp.compress(Bitmap.CompressFormat.JPEG,100,os);
     }
 
     public static boolean stringToStream(String content,OutputStream os) throws IOException {

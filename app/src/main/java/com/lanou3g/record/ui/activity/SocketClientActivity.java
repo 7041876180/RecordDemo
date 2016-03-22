@@ -1,5 +1,7 @@
 package com.lanou3g.record.ui.activity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -54,9 +56,16 @@ public class SocketClientActivity extends AppCompatActivity implements View.OnCl
         try {
             socket = new Socket("192.168.0.103", 1958);
             OutputStream os = socket.getOutputStream();
-            StreamUtil.stringToStream(content,os);
+//            StreamUtil.stringToStream(content,os);
+            sendBitmap(R.mipmap.picture,os);
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            if (socket != null) try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
 
@@ -76,5 +85,10 @@ public class SocketClientActivity extends AppCompatActivity implements View.OnCl
                 sendSocket(content);
             }
         }).start();
+    }
+
+    private void sendBitmap(int resId,OutputStream os) {
+        Bitmap bmp = BitmapFactory.decodeResource(getResources(),resId);
+        StreamUtil.bmpToStream(bmp,os);
     }
 }
