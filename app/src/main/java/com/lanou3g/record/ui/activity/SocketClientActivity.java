@@ -45,6 +45,8 @@ public class SocketClientActivity extends AppCompatActivity implements View.OnCl
 
         btnSend.setOnClickListener(this);
         btnReceive.setOnClickListener(this);
+
+        btnReceive.setEnabled(false);
         adapter = new SocketAdapter(this);
         lvChat.setAdapter(adapter);
 
@@ -56,8 +58,7 @@ public class SocketClientActivity extends AppCompatActivity implements View.OnCl
         try {
             socket = new Socket("192.168.0.103", 1958);
             OutputStream os = socket.getOutputStream();
-//            StreamUtil.stringToStream(content,os);
-            sendBitmap(R.mipmap.picture,os);
+            StreamUtil.stringToStream(content,os);
         } catch (IOException e) {
             e.printStackTrace();
         }finally {
@@ -67,8 +68,6 @@ public class SocketClientActivity extends AppCompatActivity implements View.OnCl
                 e.printStackTrace();
             }
         }
-
-
     }
 
     @Override

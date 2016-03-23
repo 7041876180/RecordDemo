@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.lanou3g.record.R;
 import com.lanou3g.record.model.entity.ChatMessage;
@@ -33,22 +34,18 @@ public class SocketServerActivity extends AppCompatActivity implements View.OnCl
     private static final String TAG = "SocketServerActivity";
     private ListView lvChat;
     private Button btnSend;
-    private ImageView imgReceive;
     private EditText editText;
     private SocketAdapter adapter;
 
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-//            String content = (String) msg.obj;
-//            ChatMessage chat = new ChatMessage();
-//            chat.setContent(content);
-//            chat.setMsgMode(ChatMessage.MODE_RECEIVE);
-//            adapter.append(chat);
-//            lvChat.smoothScrollToPosition(adapter.getCount() - 1);
-            Bitmap bmp = (Bitmap) msg.obj;
-            Log.d(TAG, "handleMessage: " + bmp.getWidth() + "-->" +bmp);
-            imgReceive.setImageBitmap(bmp);
+            String content = (String) msg.obj;
+            ChatMessage chat = new ChatMessage();
+            chat.setContent(content);
+            chat.setMsgMode(ChatMessage.MODE_RECEIVE);
+            adapter.append(chat);
+            lvChat.smoothScrollToPosition(adapter.getCount() - 1);
             return false;
         }
     });
@@ -59,11 +56,9 @@ public class SocketServerActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_receive);
         lvChat = (ListView) findViewById(R.id.lv_chat);
         btnSend = (Button) findViewById(R.id.btn_send);
-        imgReceive = (ImageView) findViewById(R.id.img_receive);
         editText = (EditText) findViewById(R.id.et_edit);
 
         btnSend.setOnClickListener(this);
-        imgReceive.setOnClickListener(this);
         adapter = new SocketAdapter(this);
         lvChat.setAdapter(adapter);
 
@@ -84,12 +79,9 @@ public class SocketServerActivity extends AppCompatActivity implements View.OnCl
                 Log.d(TAG, "initSocketServer: 准备接收");
                 Socket socket = server.accept();
                 InputStream is = socket.getInputStream();
-//                String content = StreamUtil.inputToString(is);
-                Log.d(TAG, "initSocketServer: "+is);
-                Bitmap bmp = StreamUtil.inputToBitmap(is);
+                String content = StreamUtil.inputToString(is);
                 Message msg = handler.obtainMessage();
-//                msg.obj = content;
-                msg.obj = bmp;
+                msg.obj = content;
                 handler.sendMessage(msg);
 
             } catch (IOException e) {
@@ -108,16 +100,16 @@ public class SocketServerActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         String content = editText.getText().toString();
         ChatMessage msg = new ChatMessage();
-        msg.setContent(content);
+        msg.setContent("这个是假消息,未进行发送");
         switch (v.getId()) {
             case R.id.btn_send:
                 msg.setMsgMode(ChatMessage.MODE_SEND);
                 break;
-            case R.id.btn_receive:
-                msg.setMsgMode(ChatMessage.MODE_RECEIVE);
-                break;
         }
         adapter.append(msg);
         lvChat.smoothScrollToPosition(adapter.getCount() - 1);
+    }
+    private void toast(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

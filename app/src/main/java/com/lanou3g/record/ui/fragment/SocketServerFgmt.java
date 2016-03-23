@@ -17,6 +17,7 @@ import android.widget.ListView;
 import com.lanou3g.record.R;
 import com.lanou3g.record.model.entity.ChatMessage;
 import com.lanou3g.record.ui.adapter.SocketAdapter;
+import com.lanou3g.record.utils.StreamUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -64,6 +65,7 @@ public class SocketServerFgmt extends Fragment implements View.OnClickListener {
 
         btnSend.setOnClickListener(this);
         btnReceive.setOnClickListener(this);
+        btnReceive.setEnabled(false);
         adapter = new SocketAdapter(getActivity());
         lvChat.setAdapter(adapter);
 
@@ -79,20 +81,12 @@ public class SocketServerFgmt extends Fragment implements View.OnClickListener {
         ServerSocket server = null;
         int i = 1;
         while (true) {
-            Log.d(TAG, "循环开始-->"+i);
             try {
                 server = new ServerSocket(1958);
                 Socket socket = server.accept();
                 InputStream is = socket.getInputStream();
-
-                char [] data = new char[1024];
-                InputStreamReader reader = new InputStreamReader(is);
-                reader.read(data);
-
-
-                String content = String.copyValueOf(data);
-                is.close();
-                Message msg = new Message();
+                String content = StreamUtil.inputToString(is);
+                Message msg = handler.obtainMessage();
                 msg.obj = content;
                 handler.sendMessage(msg);
 
@@ -100,12 +94,11 @@ public class SocketServerFgmt extends Fragment implements View.OnClickListener {
                 e.printStackTrace();
             } finally {
                 try {
-                    server.close();
+                    if (null != server) server.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            Log.d("SocketServerActivity", "循环结束-->"+i);
         }
     }
 
@@ -113,7 +106,7 @@ public class SocketServerFgmt extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         String content = editText.getText().toString();
         ChatMessage msg = new ChatMessage();
-        msg.setContent(content);
+        msg.setContent("假消息,未发送");
         switch (v.getId()) {
             case R.id.btn_send:
                 msg.setMsgMode(ChatMessage.MODE_SEND);
