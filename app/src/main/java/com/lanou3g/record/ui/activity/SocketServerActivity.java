@@ -73,9 +73,9 @@ public class SocketServerActivity extends AppCompatActivity implements View.OnCl
     private void initSocketServer() {
         ServerSocket server = null;
         int i = 1;
-        while (true) {
-            try {
-                server = new ServerSocket(1958);
+        try {
+            server = new ServerSocket(1958);
+            while (true) {
                 Log.d(TAG, "initSocketServer: 准备接收");
                 Socket socket = server.accept();
                 InputStream is = socket.getInputStream();
@@ -83,15 +83,14 @@ public class SocketServerActivity extends AppCompatActivity implements View.OnCl
                 Message msg = handler.obtainMessage();
                 msg.obj = content;
                 handler.sendMessage(msg);
-
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != server) server.close();
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    if (null != server) server.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         }
     }
@@ -109,7 +108,8 @@ public class SocketServerActivity extends AppCompatActivity implements View.OnCl
         adapter.append(msg);
         lvChat.smoothScrollToPosition(adapter.getCount() - 1);
     }
-    private void toast(String message){
+
+    private void toast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

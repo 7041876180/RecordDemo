@@ -48,6 +48,7 @@ public class SocketServerFgmt extends Fragment implements View.OnClickListener {
             return false;
         }
     });
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,12 +57,12 @@ public class SocketServerFgmt extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onViewCreated(View view,@Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        lvChat = (ListView)  view.findViewById(R.id.lv_chat);
-        btnSend = (Button)   view.findViewById(R.id.btn_send);
-        btnReceive = (Button)view.findViewById(R.id.btn_receive);
-        editText = (EditText)view.findViewById(R.id.et_edit);
+        lvChat = (ListView) view.findViewById(R.id.lv_chat);
+        btnSend = (Button) view.findViewById(R.id.btn_send);
+        btnReceive = (Button) view.findViewById(R.id.btn_receive);
+        editText = (EditText) view.findViewById(R.id.et_edit);
 
         btnSend.setOnClickListener(this);
         btnReceive.setOnClickListener(this);
@@ -80,24 +81,23 @@ public class SocketServerFgmt extends Fragment implements View.OnClickListener {
     private void initSocketServer() {
         ServerSocket server = null;
         int i = 1;
-        while (true) {
-            try {
-                server = new ServerSocket(1958);
+        try {
+            server = new ServerSocket(1958);
+            while (true) {
                 Socket socket = server.accept();
                 InputStream is = socket.getInputStream();
                 String content = StreamUtil.inputToString(is);
                 Message msg = handler.obtainMessage();
                 msg.obj = content;
                 handler.sendMessage(msg);
-
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != server) server.close();
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    if (null != server) server.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         }
     }

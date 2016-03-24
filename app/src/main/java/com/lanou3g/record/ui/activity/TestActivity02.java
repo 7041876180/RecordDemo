@@ -38,12 +38,12 @@ public class TestActivity02 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ImageView img = new ImageView(this);
         setContentView(img);
-        String text = "测试数据流类型";
+        String text = "测试数据流类型:";
 
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.picture);
         OutputStream baos = null;
         try {
-            baos = new FileOutputStream("/sdcard/cache/picture");
+            baos = new FileOutputStream("/sdcard/cache/picture.png");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -60,7 +60,7 @@ public class TestActivity02 extends AppCompatActivity {
         }
         InputStream is = null;
         try {
-            is = new FileInputStream("/sdcard/cache/picture");
+            is = new FileInputStream("/sdcard/cache/picture.png");
 //            int type = StreamUtil.formatStream(is);
 //            Bitmap bitmap = StreamUtil.inputToBitmap(is,"pictrue.png");
             Bitmap bitmap = BitmapFactory.decodeStream(is);
@@ -77,6 +77,7 @@ public class TestActivity02 extends AppCompatActivity {
 //                    text += type;
 //                    break;
 //            }
+            Log.d("TestActivity02", text);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
