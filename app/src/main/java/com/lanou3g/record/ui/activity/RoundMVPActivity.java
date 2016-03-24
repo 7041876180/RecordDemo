@@ -32,7 +32,7 @@ public class RoundMVPActivity
     protected RoundPresenter createPresenter() {
         // 初始化Presenter,将本类通过构造方法传递给Presenter
         // *****此处的this代表View层接口类型的数据,非Context*****
-        return new RoundPresenter(this);
+        return new RoundPresenter();
     }
 
     @Override

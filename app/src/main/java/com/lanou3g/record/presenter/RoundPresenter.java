@@ -14,20 +14,20 @@ public class RoundPresenter extends BasePresenter<RoundViewInterface>
     implements NetworkConnect<BallEntity>,DBReadable<BallEntity>{
 
     /** View层的实现类,也就是Activity */
-    private RoundViewInterface mRoundView;
+//    private RoundViewInterface mRoundView;
     /** Model层的实现类 */
     private RoundModelInterface mModel;
 
     /** 构造方法内初始化Model层,通过形参传递初始化View层 */
-    public RoundPresenter(RoundViewInterface mRoundView) {
-        this.mRoundView = mRoundView;
+    public RoundPresenter() {
+//        this.mRoundView = mRoundView;
         this.mModel = new RoundModelImpl();
     }
 
     /** 开始获取网络数据 */
     public void startNetConnect(String url){
         // View层的showLoading方法
-        mRoundView.showLoading();
+        getView().showLoading();
         // Model层的获取网络数据方法,将NetworkRefreshConnect的实例,也就是本类传到Model
         mModel.startRefreshConnect(url, this);
     }
@@ -45,7 +45,7 @@ public class RoundPresenter extends BasePresenter<RoundViewInterface>
      * @param loadUrl
      */
     public void load(String loadUrl){
-        mRoundView.showLoading();
+        getView().showLoading();
         // Model层的加载数据
         mModel.startLoadConnect(loadUrl, this);
     }
@@ -54,28 +54,28 @@ public class RoundPresenter extends BasePresenter<RoundViewInterface>
     public void onRefreshCompleted(BallEntity result) {
         // 数据刷新成功,会回调执行此方法
         // 执行View层的隐藏Loading和现实数据
-        mRoundView.hideLoading();
-        mRoundView.showRefreshData(result);
+        getView().hideLoading();
+        getView().showRefreshData(result);
     }
 
     @Override
     public void onFailed() {
         // 数据刷新或加载失败,会回调执行此方法
-        mRoundView.dealError();
+        getView().dealError();
         mModel.readDB(this);
-        mRoundView.hideLoading();
+        getView().hideLoading();
     }
 
     @Override
     public void onReadDB(BallEntity result) {
         // 读取数据库回调,执行View层的展示数据方法
-        mRoundView.showRefreshData(result);
+        getView().showRefreshData(result);
     }
 
     @Override
     public void onLoadCompleted(BallEntity result) {
         // 数据加载成功,会回调执行此方法
-        mRoundView.hideLoading();
-        mRoundView.showLoadData(result);
+        getView().hideLoading();
+        getView().showLoadData(result);
     }
 }
