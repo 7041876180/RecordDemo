@@ -1,13 +1,28 @@
 package com.lanou3g.record.ui.activity;
 
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.lanou3g.record.R;
 import com.lanou3g.record.model.entity.ContactBean;
+import com.lanou3g.record.tools.CloseHelper;
+import com.lanou3g.record.utils.StreamUtil;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FilterOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,60 +36,53 @@ public class TestActivity02 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ImageView img = new ImageView(this);
+        setContentView(img);
+        String text = "测试数据流类型";
 
-        Cursor cursor = getContentResolver().query(
-                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                null, null, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
-
-        List<ContactBean> beanList = new ArrayList<>();
-        cursor.moveToFirst();
-
-        do {
-            ContactBean contactBean = new ContactBean();
-            //获取联系人姓名
-            String displayName = cursor.getString(cursor.getColumnIndex(
-                    ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-            contactBean.setName(displayName);
-            //获取联系人手机号
-            String number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-            contactBean.setTelPhone(number);
-
-            beanList.add(contactBean);
-        } while (cursor.moveToNext());
-
-        Log.d("TAGGG", beanList.toString());
-
-        List<Character> tags = new ArrayList<>();
-        Map<Character,List<ContactBean>> infos = new HashMap<>();
-
-        for (int i = 0; i < beanList.size(); i++) {
-            ContactBean bean = beanList.get(i);
-            String name = bean.getName();
-            char first = name.charAt(0);
-            if (first >= 65 && first <= 90) {
-            } else {
-                first = (char) (first - 32);
-            }
-
-            List<ContactBean> contactBeans = null;
-            if (tags.contains(first)) {
-                contactBeans = infos.get(first);
-            }else {
-                contactBeans = new ArrayList<>();
-                tags.add(first);
-            }
-            contactBeans.add(bean);
-            infos.put(first,contactBeans);
+        Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.picture);
+        OutputStream baos = null;
+        try {
+            baos = new FileOutputStream("/sdcard/cache/picture");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-        Log.d("TAGGG",infos.toString());
-
-        for (int i = 0; i < infos.size(); i++) {
-            List<ContactBean> beans = infos.get(i+65);
-            Log.d("TAGGG",beans.toString());
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//        try {
+//            StreamUtil.stringToStream("Android Studio is very good !",baos);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        try {
+            baos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-
-
+        InputStream is = null;
+        try {
+            is = new FileInputStream("/sdcard/cache/picture");
+//            int type = StreamUtil.formatStream(is);
+//            Bitmap bitmap = StreamUtil.inputToBitmap(is,"pictrue.png");
+            Bitmap bitmap = BitmapFactory.decodeStream(is);
+            img.setImageBitmap(bitmap);
+//            switch (type) {
+//                case StreamUtil.FORMAT_PNG:
+//                    text += "-这是一张PNG图片";
+//                    break;
+//                case StreamUtil.FORMAT_JPEG:
+//                    text += "-这是一张JPEG图片";
+//                    break;
+//                default:
+//                    Log.d("TestActivity02", "type:" + type);
+//                    text += type;
+//                    break;
+//            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            CloseHelper.close(is);
+        }
     }
-
 }
