@@ -1,2 +1,2 @@
-include ':app', ':adapter'
+include ':app', ':adapter', ':mvvm'
 //include ':greendaolibrary', ':decorate', ':observer', ':command', ':threadpoll', ':iterator', ':getinsidetext', ':rabbitdemo'
