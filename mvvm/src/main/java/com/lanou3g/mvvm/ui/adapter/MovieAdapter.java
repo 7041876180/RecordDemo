@@ -13,6 +13,7 @@ import com.lanou3g.mvvm.R;
 import com.lanou3g.mvvm.databinding.ItemMovieBinding;
 import com.lanou3g.mvvm.model.MovieInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,9 +24,15 @@ public class MovieAdapter extends BaseAdapter {
     private List<MovieInfo> infos;
     private LayoutInflater inflater;
 
-    public MovieAdapter(Context context,List<MovieInfo> infos) {
+    public MovieAdapter(Context context) {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.infos = infos;
+        this.infos = new ArrayList<>();
+    }
+
+    public void addData(List<MovieInfo> infos){
+        this.infos.clear();
+        this.infos.addAll(infos);
+        notifyDataSetChanged();
     }
 
     @Override
