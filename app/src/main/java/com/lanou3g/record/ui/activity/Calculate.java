@@ -12,7 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import com.lanou3g.record.utils.ScreenUtils;
+import com.lanou3g.library.utils.ScreenUtils;
 
 import java.util.ArrayList;
 import java.util.List;

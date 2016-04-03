@@ -14,15 +14,10 @@ import android.widget.ListView;
 import com.lanou3g.record.R;
 import com.lanou3g.record.model.entity.ChatMessage;
 import com.lanou3g.record.ui.adapter.SocketAdapter;
-import com.lanou3g.record.utils.StreamUtil;
+import com.lanou3g.library.utils.StreamUtil;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 /**

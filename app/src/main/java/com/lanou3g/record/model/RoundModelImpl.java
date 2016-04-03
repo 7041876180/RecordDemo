@@ -8,7 +8,7 @@ import com.lanou3g.record.model.entity.BallEntity;
 import com.lanou3g.record.model.entity.greendao.RecommendEntity;
 import com.lanou3g.record.presenter.DBReadable;
 import com.lanou3g.record.presenter.NetworkConnect;
-import com.lanou3g.record.volley.VolleySingleton;
+import com.lanou3g.library.volley.VolleySingleton;
 
 import java.util.List;
 
