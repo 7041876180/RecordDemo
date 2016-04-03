@@ -1,0 +1,19 @@
+ext {
+    androidCompileSdkVersion = 23
+    androidBuildToolsVersion = '23.0.3'
+    androidMinSdkVersion = 9
+    androidTargetSdkVersion = 23
+    supportLibraryVersion = '23.2.1'
+
+    riskyConfig = [
+            appCompat   : "com.android.support:appcompat-v7:$supportLibraryVersion",
+            cardview    : "com.android.support:cardview-v7:$supportLibraryVersion",
+            design      : "com.android.support:design:$supportLibraryVersion",
+            percent     : "com.android.support:percent:$supportLibraryVersion",
+            recyclerview: "com.android.support:recyclerview-v7:$supportLibraryVersion",
+            annotations : "com.android.support:support-annotations:$supportLibraryVersion",
+            support_v4  : "com.android.support:support-v4:$supportLibraryVersion"
+
+
+    ]
+}
