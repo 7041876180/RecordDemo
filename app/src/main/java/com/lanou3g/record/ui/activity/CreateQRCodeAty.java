@@ -10,7 +10,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 
 import com.lanou3g.record.R;
-import com.lanou3g.record.tools.CreateQRCode;
+import com.lanou3g.library.tools.CreateQRCode;
 
 /**
  * 本类由: Risky57 创建于: 16/3/9.

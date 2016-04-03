@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 
-import com.lanou3g.record.utils.ScreenUtils;
+import com.lanou3g.library.utils.ScreenUtils;
 
 /**
  * 本类由: Risky 创建于: 15/11/17.

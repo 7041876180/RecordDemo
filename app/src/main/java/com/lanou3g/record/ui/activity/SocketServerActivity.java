@@ -1,6 +1,5 @@
 package com.lanou3g.record.ui.activity;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,20 +9,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.lanou3g.record.R;
 import com.lanou3g.record.model.entity.ChatMessage;
-import com.lanou3g.record.tools.CloseHelper;
+import com.lanou3g.library.tools.CloseHelper;
 import com.lanou3g.record.ui.adapter.SocketAdapter;
-import com.lanou3g.record.utils.StreamUtil;
+import com.lanou3g.library.utils.StreamUtil;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 

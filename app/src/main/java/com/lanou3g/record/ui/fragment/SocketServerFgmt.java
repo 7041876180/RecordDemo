@@ -5,8 +5,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +15,10 @@ import android.widget.ListView;
 import com.lanou3g.record.R;
 import com.lanou3g.record.model.entity.ChatMessage;
 import com.lanou3g.record.ui.adapter.SocketAdapter;
-import com.lanou3g.record.utils.StreamUtil;
+import com.lanou3g.library.utils.StreamUtil;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 

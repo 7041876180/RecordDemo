@@ -1,32 +1,22 @@
 package com.lanou3g.record.ui.activity;
 
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.lanou3g.record.R;
-import com.lanou3g.record.model.entity.ContactBean;
-import com.lanou3g.record.tools.CloseHelper;
-import com.lanou3g.record.utils.StreamUtil;
+import com.lanou3g.library.tools.CloseHelper;
+import com.lanou3g.library.utils.StreamUtil;
 
-import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FilterOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Risky on 15/10/28.

@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.lanou3g.record.utils.TimeUtil;
+import com.lanou3g.library.utils.TimeUtil;
 
 import java.util.Date;
 

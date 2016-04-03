@@ -4,21 +4,19 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
 import com.lanou3g.record.R;
 import com.lanou3g.record.model.entity.BallEntity;
 import com.lanou3g.record.model.entity.greendao.RecommendEntity;
-import com.lanou3g.record.network.GoNet;
-import com.lanou3g.record.network.NetInterface;
-import com.lanou3g.record.okhttp.OkHttpClientManager;
+import com.lanou3g.library.network.GoNet;
+import com.lanou3g.library.network.NetInterface;
+import com.lanou3g.library.okhttp.OkHttpClientManager;
 import com.lanou3g.record.ui.adapter.HeaderGridViewAdapter;
 import com.lanou3g.record.ui.adapter.HeaderViewPagerAdapter;
 import com.lanou3g.record.view.HeaderGridView;
-import com.lanou3g.record.volley.VolleySingleton;
-import com.squareup.okhttp.Request;
+import com.lanou3g.library.volley.VolleySingleton;
 
 import java.util.List;
 
