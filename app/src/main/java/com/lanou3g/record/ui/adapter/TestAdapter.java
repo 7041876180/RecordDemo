@@ -4,12 +4,11 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
+import com.lanou3g.library.base.BaseAdapter;
 import com.lanou3g.record.R;
 import com.lanou3g.record.ui.activity.AdapterActivity;
 
 import java.util.List;
-
-import me.dm7.barcodescanner.core.ViewFinderView;
 
 /**
  * 本类由: Risky57 创建于: 16/3/1.

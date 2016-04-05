@@ -3,11 +3,10 @@ package com.lanou3g.record.ui.activity;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.lanou3g.record.ui.adapter.BaseAdapter;
+import com.lanou3g.library.base.BaseAdapter;
 import com.lanou3g.record.ui.adapter.TestAdapter;
 
 import java.util.ArrayList;

@@ -1,5 +1,6 @@
 package com.lanou3g.library.volley;
 
+import android.app.Activity;
 import android.content.Context;
 import android.widget.ImageView;
 
@@ -32,7 +33,7 @@ public class VolleySingleton {
     }
 
     public static void init(Context context){
-        sContext = context;
+        sContext = context.getApplicationContext();
     }
 
     private static final class SingletonHolder {

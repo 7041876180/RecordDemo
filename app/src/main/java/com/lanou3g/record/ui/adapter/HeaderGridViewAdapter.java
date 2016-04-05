@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.lanou3g.library.base.AbsAdapter;
 import com.lanou3g.record.R;
 import com.lanou3g.record.model.entity.greendao.RecommendEntity;
 import com.lanou3g.library.volley.VolleySingleton;

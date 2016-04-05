@@ -1,4 +1,4 @@
-package com.lanou3g.record.ui.adapter;
+package com.lanou3g.library.base;
 
 import android.content.Context;
 import android.view.View;

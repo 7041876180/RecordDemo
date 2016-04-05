@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.lanou3g.library.base.AbsAdapter;
+import com.lanou3g.library.base.BaseAdapter;
 import com.lanou3g.record.R;
 import com.lanou3g.record.model.entity.ChatMessage;
 
@@ -13,7 +15,7 @@ import java.util.List;
 /**
  * 本类由: Risky57 创建于: 16/3/22.
  */
-public class SocketAdapter extends AbsAdapter<ChatMessage>{
+public class SocketAdapter extends AbsAdapter<ChatMessage> {
     public SocketAdapter(List<ChatMessage> dataList, Context context) {
         super(dataList, context);
     }
